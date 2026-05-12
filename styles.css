@@ -57,20 +57,42 @@ h1, h2, h3, h4, h5, h6 {
     --font-nav-a: bold 1rem var(--font-family);
     font-family: var(--font-family);
 
-    --separation-s: 1rem;
+    --separation-xs: 1rem;
+    --separation-s: 2.25rem;
+    --separation-m: 5rem;
 
     --a-color: rgb(125, 53, 125);
+    --color-orange: rgb(255, 171, 119);
+
+    --border-radius-s: 7px;
+    --border-radius-m: 15px;
     --a-border-bottom: 2px solid var(--a-color);
+    --aside-border-right: 1px solid grey;
 
     --transition-s: 0.5s;
     --transition-m: 1s;
     --transition-l: 2s;
 
     --pfp-length: 70px;
+    --book-width: 250px;
+    --book-height: 350px;
+    --book-border: 10px solid rgb(208, 208, 208);
+    --bookmark-unread-bg-color: green;
+    --bookmark-read-bg-color: rgb(131, 0, 0);
+    --add-button-size: 150px;
 
     --box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.13);
 }
 
+html{
+  height: 100%;
+}
+
+body {
+  display: grid;
+  min-height: 100%;
+  grid-template: repeat(2, min-content) auto min-content / 1fr minmax(min-content, 3fr);
+}
 
 a {
     color: var(--a-color);
@@ -103,6 +125,8 @@ a:hover::after {
 
 
 nav {
+    grid-area: 1 / 1 / 2 / -1;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -110,6 +134,7 @@ nav {
     height: var(--pfp-length);
 
     box-shadow: var(--box-shadow);
+    gap: var(--separation-m);
 }
 nav ul{
     display: flex;
@@ -119,11 +144,15 @@ nav ul{
     list-style-type: none;
 }
 
+nav li{
+  flex: none;
+}
+
 .profile-container {
   position: relative;
   height: 100%;
-  width: calc(var(--pfp-length) + (2 * var(--separation-s)) + 150px);
-  margin-left: var(--separation-s, 1rem);
+  width: calc(var(--pfp-length) + (2 * var(--separation-s)) + 200px);
+  flex: none;
 }
 
 .profile {
@@ -140,7 +169,7 @@ nav ul{
     overflow: hidden;
 
     border-bottom-left-radius: calc(var(--pfp-length) / 2);
-    background-color: rgb(255, 171, 119);
+    background-color: var(--color-orange);
     box-shadow: var(--box-shadow);
 
     transition: height var(--transition-m);
@@ -175,7 +204,7 @@ nav ul{
 .profile p{
   /* Ensure the name doesn't make the profile div too wide*/
   box-sizing: content-box;
-  max-width: 250px;
+  max-width: 200px;
   overflow: hidden;
   text-wrap: nowrap;
   text-overflow: ellipsis;
@@ -190,4 +219,153 @@ nav ul{
 .profile:hover p{
   background-color: rgba(255, 255, 255, 0.7);
   transform: translateY(65px);
+}
+
+header {
+  grid-area: 2 / 2 / 3 / -1;
+  justify-self: left;
+  align-self: center;
+  padding: var(--separation-s);
+  text-decoration: underline;
+}
+
+
+aside{
+  grid-area: 2 / 1 / 4 / 2;
+  align-self: stretch;
+  background-image: url('./img/piqsels.com-id-zvhgt.jpg');
+  background-position: left;
+  background-size: cover;
+  background-attachment: fixed;
+  
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+aside fieldset{
+  background-color: rgb(255, 255, 255);
+  padding: var(--separation-s);
+  margin-left: var(--separation-s);
+  border: none;
+  flex: none;
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: var(--border-radius-s) 0 0 var(--border-radius-s);
+}
+label{
+  padding: 0 var(--separation-s);
+  text-wrap: nowrap;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--book-width));
+  place-content: start;
+  gap: var(--separation-s);
+  padding: var(--separation-s);
+  padding-top: 0;
+}
+.book-card {
+  height: var(--book-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius-s) var(--border-radius-m) var(--border-radius-m) var(--border-radius-s);
+  overflow: hidden;
+  border-bottom: var(--book-border);
+  border-right: var(--book-border);
+}
+
+.cover {
+  flex: 3;
+  background-color: var(--color-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  position: relative;
+}
+.bookmark {
+  position: absolute;
+  top: 0;
+  right: var(--separation-s);
+  width: calc(var(--separation-s));
+  height: calc(var(--book-height) * (0.5));
+  z-index: 0;
+  background-color: var(--bookmark-unread-bg-color);
+
+  color: white;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bookmark::before {
+  content: "";
+  position: absolute;
+  bottom: calc((var(--separation-s) / -2));
+  height: 0;
+  width: var(--separation-s);
+  z-index: -1;
+
+  border-left: calc(var(--separation-s) / 2) solid var(--bookmark-unread-bg-color);
+  border-right: calc(var(--separation-s) / 2) solid var(--bookmark-unread-bg-color);
+  border-bottom: calc(var(--separation-s) / 2) solid transparent;
+  border-top: calc(var(--separation-s) / 2) solid var(--bookmark-unread-bg-color);
+}
+.bookmark.read {
+  height: calc(var(--book-height) * (0.3));
+  background-color: var(--bookmark-read-bg-color);
+}
+.bookmark.read::before {
+  border-color: var(--bookmark-read-bg-color);
+  border-bottom-color: transparent;
+}
+
+button.add-book{
+  border-radius: 50%;
+  height: var(--add-button-size);
+  width: var(--add-button-size);
+  border: none;
+  font-size: calc(var(--add-button-size) / 1.5);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--box-shadow);
+
+  transition: background-color var(--transition-s);
+}
+button.add-book:hover{
+  background-color: rgb(220, 220, 220);
+}
+button.add-book:active{
+  background-color: grey;
+  box-shadow: inset var(--box-shadow);
+  transition: 0s;
+}
+.fields{
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--separation-xs);
+  padding: 0 var(--separation-xs);
+}
+.fields div{
+  width: calc(var(--book-width) * 0.75);
+  height: calc(var(--separation-s) * 0.5);
+  background-color: rgb(223, 223, 223);
+  border-radius: var(--border-radius-s);
+}
+.fields div:first-child {
+  width: calc(var(--book-width) * 0.65);
+  height: calc(var(--separation-s) * 0.75);
+}
+.fields div:last-child {
+  width: calc(var(--book-width) * 0.35);
+  height: calc(var(--separation-s) * 0.35);
 }

@@ -11,7 +11,7 @@
     <nav>
         <ul>
             <li><a href="">Home</a></li>
-            <li><a href="">Support</a></li>
+            <li><a href="">My Library</a></li>
             <li><a href="">About</a></li>
         </ul>
         <h1>Libirynth</h1>
@@ -22,5 +22,61 @@
             </div>
         </div>
     </nav>
+    <header>
+        <h2>Your Collection</h2>
+    </header>
+    <main>
+        <div class="book-card">
+            <div class="cover">
+                <button type="button" class="add-book" command="show-modal" commandfor="add-book-dialog">+</button>
+            </div>
+            <div class="fields">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="book-card">
+            <div class="cover">
+                <div class="bookmark read">Not Read</div>
+            </div>
+            <div class="fields"></div>
+        </div>
+        <div class="book-card">
+            <div class="cover"></div>
+            <div class="fields"></div>
+        </div>
+        <div class="book-card">
+            <div class="cover"></div>
+            <div class="fields"></div>
+        </div>
+        <div class="book-card">
+            <div class="cover"></div>
+            <div class="fields"></div>
+        </div>
+        <div class="book-card">
+            <div class="cover"></div>
+            <div class="fields"></div>
+        </div>
+    </main>
+    <aside>
+        <fieldset>
+            <div><input type="checkbox" id="filter-1" name="filters" value="filter-1"><label for="filter-1">category-1</label></div>
+            <div><input type="checkbox" id="filter-2" name="filters" value="filter-2"><label for="filter-2">category-2</label></div>
+            <div><input type="checkbox" id="filter-3" name="filters" value="filter-3"><label for="filter-3">category-3</label></div>
+            <div><input type="checkbox" id="filter-4" name="filters" value="filter-4"><label for="filter-4">category-4</label></div>
+            <div><input type="checkbox" id="filter-5" name="filters" value="filter-5"><label for="filter-5">category-5</label></div>
+        </fieldset>
+    </aside>
+    <dialog id="add-book-dialog">
+        <form action="" method="dialog">
+            <div><label for="Title">Title</label><input type="text" id="Title" required="required" minlength="1" maxlength="150"></div>
+            <div><label for="Author">Author</label><input type="text" id="Author" required="required" minlength="1" maxlength="150"></div>
+            <div><label for="Pages">No. of Pages</label><input type="number" id="Pages" required="required" min="1"></div>
+            <div><input type="checkbox" id="Read"><label for="Read">I have read the book</label></div>
+            <button type="submit">Submit</button>
+            <button type="button" command="close" commandfor="add-book-dialog">x</button>
+        </form>
+    </dialog>
 </body>
 </html>
