@@ -369,3 +369,35 @@ button.add-book:active{
   width: calc(var(--book-width) * 0.35);
   height: calc(var(--separation-s) * 0.35);
 }
+
+dialog {
+  border-radius: var(--border-radius-m);
+  border: none;
+  
+}
+dialog > form > * {
+  margin-bottom: var(--separation-xs);
+}
+dialog button[command="close"] {
+  border: none;
+  background-color: transparent;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+dialog div {
+  display: flex;
+  align-items: center;
+}
+dialog div label {
+  flex:2;
+}
+dialog div input {
+  flex: 3;
+}
+dialog div input[type="checkbox"]+label{
+  flex: 3;
+}
+dialog div input[type="checkbox"] {
+  flex: 2;
+}
