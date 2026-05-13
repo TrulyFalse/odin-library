@@ -64,6 +64,7 @@ h1, h2, h3, h4, h5, h6 {
     --a-color: rgb(125, 53, 125);
     --color-orange: rgb(255, 171, 119);
 
+    --border-s: 1px solid grey;
     --border-radius-s: 7px;
     --border-radius-m: 15px;
     --a-border-bottom: 2px solid var(--a-color);
@@ -80,6 +81,8 @@ h1, h2, h3, h4, h5, h6 {
     --bookmark-unread-bg-color: green;
     --bookmark-read-bg-color: rgb(131, 0, 0);
     --add-button-size: 150px;
+    --input-height: 2.5rem;
+    --input-width: 12rem;
 
     --box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.13);
 }
@@ -253,7 +256,7 @@ aside fieldset{
   transform: translateY(-50%);
   border-radius: var(--border-radius-s) 0 0 var(--border-radius-s);
 }
-label{
+aside label{
   padding: 0 var(--separation-s);
   text-wrap: nowrap;
 }
@@ -375,28 +378,55 @@ dialog {
   border: none;
   
 }
-dialog > form > * {
-  margin-bottom: var(--separation-xs);
+dialog > form{
+  display: flex;
+  flex-direction: column;
+  gap: var(--separation-xs);
+}
+form input, form button, form select{
+  border-radius: var(--border-radius-s);
+  border: var(--border-s);
+  padding: calc(var(--separation-xs) / 2) var(--separation-xs);
+  height: var(--input-height); 
+  width: var(--input-width);
+}
+form input[type="checkbox"], form button:not([type="submit"]){
+  width: var(--separation-xs);
 }
 dialog button[command="close"] {
   border: none;
   background-color: transparent;
-  display: block;
-  margin-left: auto;
-  margin-right: 0;
+  align-self: flex-end;
+}
+dialog div:first-child{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: ". title close-button";
+}
+dialog div:first-child h3{
+  grid-area: title;
+}
+dialog div:first-child button{
+  grid-area: close-button;
+  justify-self: self-end;
 }
 dialog div {
   display: flex;
   align-items: center;
+  gap: var(--separation-xs);
 }
 dialog div label {
   flex:2;
 }
-dialog div input {
+dialog div input, dialog div select {
   flex: 3;
 }
+dialog div:has(input[type='checkbox']) {
+  align-self: flex-start;
+  justify-content: flex-start;
+}
 dialog div input[type="checkbox"]+label{
-  flex: 3;
+  flex: none;
 }
 dialog div input[type="checkbox"] {
   flex: 2;
