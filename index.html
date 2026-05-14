@@ -34,6 +34,7 @@
                 <div></div>
                 <div></div>
                 <div></div>
+                <div></div>
             </div>
         </div>
         <div class="book-card">
@@ -61,11 +62,17 @@
     </main>
     <aside>
         <fieldset>
-            <div><input type="checkbox" id="filter-1" name="filters" value="filter-1"><label for="filter-1">category-1</label></div>
-            <div><input type="checkbox" id="filter-2" name="filters" value="filter-2"><label for="filter-2">category-2</label></div>
-            <div><input type="checkbox" id="filter-3" name="filters" value="filter-3"><label for="filter-3">category-3</label></div>
-            <div><input type="checkbox" id="filter-4" name="filters" value="filter-4"><label for="filter-4">category-4</label></div>
-            <div><input type="checkbox" id="filter-5" name="filters" value="filter-5"><label for="filter-5">category-5</label></div>
+            <div><input type="checkbox" id="biography" name="filters" value="biography"><label for="biography">biography</label></div>
+            <div><input type="checkbox" id="children's-tales" name="filters" value="children's-tales"><label for="children's-tales">children's-tales</label></div>
+            <div><input type="checkbox" id="classic" name="filters" value="classic"><label for="classic">classic</label></div>
+            <div><input type="checkbox" id="crime" name="filters" value="crime"><label for="crime">crime</label></div>
+            <div><input type="checkbox" id="fantasy" name="filters" value="fantasy"><label for="fantasy">fantasy</label></div>
+            <div><input type="checkbox" id="history" name="filters" value="history"><label for="history">history</label></div>
+            <div><input type="checkbox" id="mystery" name="filters" value="mystery"><label for="mystery">mystery</label></div>
+            <div><input type="checkbox" id="thriller" name="filters" value="thriller"><label for="thriller">thriller</label></div>
+            <div><input type="checkbox" id="romance" name="filters" value="romance"><label for="romance">romance</label></div>
+            <div><input type="checkbox" id="self-help" name="filters" value="self-help"><label for="self-help">self-help</label></div>
+            <div><input type="checkbox" id="other" name="filters" value="other"><label for="other">other</label></div>
         </fieldset>
     </aside>
     <dialog id="add-book-dialog">
@@ -79,6 +86,7 @@
             <div>
                 <label for="category">Category</label>
                 <select id="category" name="category">
+                    <option value="">Choose a category</option>
                     <option value="biography">Biography</option>
                     <option value="children's-tales">Children's Tales</option>
                     <option value="classic">Classic</option>
@@ -99,3 +107,16 @@
     </dialog>
 </body>
 </html>
+
+
+<!-- biography
+children's-tales
+classic
+crime
+fantasy
+history
+mystery
+thriller
+romance
+self-help
+other -->
