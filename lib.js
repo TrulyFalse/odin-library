@@ -8,7 +8,7 @@ function Book(title, author, category, pages, read){
     this.author = author;
     this.category = category;
     this.pages = pages;
-    this.read = read;
+    this.read = read !== null;
 
     this.info = function(){
         return `${this.title} by ${this.author}, Category: ${this.category}, ${this.pages} pages, ${this.read ? "read": "not read yet"}`;
@@ -23,11 +23,17 @@ function addBookToCollection(form) {
 
 let addBookBtn = document.querySelector(`#add-book-dialog form button[type="submit"]`);
 addBookBtn.addEventListener('click', (e) => {
-    let form = new FormData(document.querySelector("#add-book-dialog form"));
-    let libraryContainer = document.querySelector(`main`);
     e.preventDefault();
+    let isFormValid = document.forms["add-book-form"].reportValidity();
+    if(!isFormValid) return;
+
+    let form = new FormData(document.querySelector("#add-book-form"));
+    let libraryContainer = document.querySelector(`main`);
+    let dialog = document.querySelector("#add-book-dialog");
     addBookToCollection(form);
     displayBooks(bookCollection, libraryContainer);
+    dialog.close();
+    document.forms["add-book-form"].reset();
 });
 
 function displayBooks(bookArray, displayContainer){
@@ -51,8 +57,12 @@ function displayBooks(bookArray, displayContainer){
 
         let bookmark = document.createElement("div");
         bookmark.classList.toggle("bookmark");
-        bookmark.addEventListener("click", () => bookmark.classList.toggle("read"));
-        if (item.read !== null) {
+        bookmark.addEventListener("click", () => {
+            item.read = !item.read;
+            bookmark.classList.toggle("read");
+            bookmark.textContent = item.read ? "Read" : "Not Read";
+        });
+        if (item.read) {
             bookmark.classList.toggle("read");
             bookmark.textContent = "Read";
         } else
@@ -64,14 +74,18 @@ function displayBooks(bookArray, displayContainer){
         let fields = document.createElement('div');
         fields.classList.toggle('fields');
 
-        let title = document.createElement('div');
+        let title = document.createElement('h3');
+        title.classList.toggle("title");
         title.textContent = item.title;
         let author = document.createElement('div');
-        author.textContent = item.author;
+        author.classList.toggle("author");
+        author.textContent = 'by ' + item.author;
         let category = document.createElement('div');
+        category.classList.toggle("category");
         category.textContent = item.category;
         let pages = document.createElement('div');
-        pages.textContent = item.pages;
+        pages.classList.toggle("pages");
+        pages.textContent = item.pages + ' pages';
 
         fields.append(title, author, category, pages);
         bookCard.append(fields);

@@ -78,8 +78,8 @@ h1, h2, h3, h4, h5, h6 {
     --book-width: 275px;
     --book-height: 400px;
     --book-border: 10px solid rgb(208, 208, 208);
-    --bookmark-unread-bg-color: green;
-    --bookmark-read-bg-color: rgb(131, 0, 0);
+    --bookmark-unread-bg-color: rgb(31, 108, 40);
+    --bookmark-read-bg-color: rgb(11, 31, 89);
     --add-button-size: 150px;
     --input-height: 2.5rem;
     --input-width: 12rem;
@@ -295,7 +295,7 @@ main {
   top: 0;
   right: var(--separation-s);
   width: calc(var(--separation-s));
-  height: calc(var(--book-height) * (0.5));
+  height: calc(var(--book-height) * (0.45));
   z-index: 0;
   background-color: var(--bookmark-unread-bg-color);
 
@@ -304,6 +304,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  
+   transition: height var(--transition-s);
 }
 .bookmark::before {
   content: "";
@@ -358,19 +360,39 @@ button.add-book:active{
   gap: var(--separation-xs);
   padding: var(--separation-xs);
 }
-.fields div{
+.adder .fields div{
   width: calc(var(--book-width) * 0.75);
   height: calc(var(--separation-s) * 0.7);
   background-color: rgb(223, 223, 223);
   border-radius: var(--border-radius-s);
 }
-.fields div:first-child {
+.adder .fields div:first-child {
   width: calc(var(--book-width) * 0.65);
   height: calc(var(--separation-s) * 0.75);
 }
-.fields div:last-child {
+.adder .fields div:last-child {
   width: calc(var(--book-width) * 0.35);
   height: calc(var(--separation-s) * 0.35);
+}
+
+.fields .title {
+  background-color: black;
+  color: white;
+  padding: 0 var(--separation-xs);
+  font: var(--font-family);
+  font: bold;
+}
+
+.fields .author {
+  
+}
+
+.fields .category {
+  color: grey;
+}
+
+.fields .pages {
+  
 }
 
 dialog {
@@ -395,7 +417,6 @@ form input[type="checkbox"], form button:not([type="submit"]){
 dialog button[command="close"] {
   border: none;
   background-color: transparent;
-  align-self: flex-end;
 }
 dialog div:first-child{
   display: grid;
@@ -407,7 +428,8 @@ dialog div:first-child h3{
 }
 dialog div:first-child button{
   grid-area: close-button;
-  justify-self: self-end;
+  justify-self: end;
+  text-align: center;
 }
 dialog div {
   display: flex;

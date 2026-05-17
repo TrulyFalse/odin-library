@@ -26,7 +26,7 @@
         <h2>Your Collection</h2>
     </header>
     <main>
-        <div class="book-card">
+        <div class="book-card adder">
             <div class="cover">
                 <button type="button" class="add-book" command="show-modal" commandfor="add-book-dialog">+</button>
             </div>
@@ -76,8 +76,8 @@
             <div><input type="checkbox" id="other" name="filters" value="other"><label for="other">other</label></div>
         </fieldset>
     </aside>
-    <dialog id="add-book-dialog">
-        <form action="" method="dialog">
+    <dialog id="add-book-dialog" closedby="none">
+        <form action="" method="dialog" id="add-book-form">
             <div>
                 <h3>Add a book</h2>
                 <button type="button" command="close" commandfor="add-book-dialog">❌</button>
@@ -86,25 +86,25 @@
             <div><label for="author">Author</label><input type="text" id="author" name="author" required="required" minlength="1" maxlength="150"></div>
             <div>
                 <label for="category">Category</label>
-                <select id="category" name="category">
+                <select id="category" name="category" required>
                     <option value="">Choose a category</option>
-                    <option value="biography">Biography</option>
-                    <option value="children's-tales">Children's Tales</option>
-                    <option value="classic">Classic</option>
-                    <option value="crime">Crime</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="history">History</option>
-                    <option value="mystery">Mystery</option>
-                    <option value="thriller">Thriller</option>
-                    <option value="romance">Romance</option>
-                    <option value="sci-fi">Sci-Fi</option>
-                    <option value="self-help">Self-help</option>
-                    <option value="other">Other</option>
+                    <option value="Biography">Biography</option>
+                    <option value="Children's-tales">Children's Tales</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="History">History</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Sci-fi">Sci-Fi</option>
+                    <option value="Self-help">Self-help</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
             <div><label for="pages">No. of Pages</label><input type="number" id="pages" name="pages" required="required" min="1"></div>
             <div><input type="checkbox" id="read" name="read" value="true"><label for="read">I have read the book</label></div>
-            <button type="submit">Submit</button>
+            <button type="submit" command="">Submit</button>
         </form>
     </dialog>
 </body>
