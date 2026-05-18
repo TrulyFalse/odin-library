@@ -380,7 +380,6 @@ button.add-book:active{
   color: white;
   padding: 0 var(--separation-xs);
   font: var(--font-family);
-  font: bold;
 }
 
 .fields .author {
@@ -391,8 +390,23 @@ button.add-book:active{
   color: grey;
 }
 
-.fields .pages {
-  
+.fields .last-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.fields .last-row *{
+  flex: 1;
+}
+.fields .last-row .delete-btn {
+  flex: none;
+  border: none;
+  background: none;
+  background-image: url("./img/bin.png");
+  background-size: contain;
+  height: var(--separation-xs);
+  width: var(--separation-xs);
 }
 
 dialog {
