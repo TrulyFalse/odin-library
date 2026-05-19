@@ -73,6 +73,7 @@ h1, h2, h3, h4, h5, h6 {
     --transition-s: 0.5s;
     --transition-m: 1s;
     --transition-l: 2s;
+    --transition-hold: 2.5s;
 
     --pfp-length: 70px;
     --book-width: 275px;
@@ -256,6 +257,9 @@ aside fieldset{
   transform: translateY(-50%);
   border-radius: var(--border-radius-s) 0 0 var(--border-radius-s);
 }
+aside h3{
+  margin-bottom: var(--separation-xs);
+}
 aside label{
   padding: 0 var(--separation-s);
   text-wrap: nowrap;
@@ -276,7 +280,7 @@ main {
   justify-content: stretch;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius-s) var(--border-radius-m) var(--border-radius-m) var(--border-radius-s);
-  overflow: hidden;
+  
   border-bottom: var(--book-border);
   border-right: var(--book-border);
 }
@@ -399,14 +403,68 @@ button.add-book:active{
 .fields .last-row *{
   flex: 1;
 }
-.fields .last-row .delete-btn {
+.fields .last-row .delete-btn-container {
   flex: none;
+  
+  
+  
+  position: relative;
+  z-index: 0;
+}
+.fields .last-row .delete-btn {
   border: none;
-  background: none;
-  background-image: url("./img/bin.png");
-  background-size: contain;
+  border: var(--border-s);
+  border-radius: var(--border-radius-s);
+  padding: var(--separation-xs);
   height: var(--separation-xs);
   width: var(--separation-xs);
+  background: none;
+  background-image: url("./img/bin.png");
+  background-position: center;
+  background-size: 75%;
+  background-repeat: no-repeat;
+}
+.fields .last-row .delete-btn::before {
+  content: "";
+  border-radius: var(--border-radius-s);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  background-color: var(--color-orange);
+  transform: translateY(50%) scaleY(0%);
+  transition: transform var(--transition-s);
+}
+.fields .last-row .delete-btn:active::before {
+  transition: transform var(--transition-hold);
+  transform: translateY(0%) scaleY(100%);
+}
+.fields .last-row .delete-btn::after {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  content: "Hold to delete";
+  position: absolute;
+  height: 100%;
+  width: 0px;
+  top: 0px;
+  left: 0px;
+  z-index: -3;
+  background-color: white;
+  border-radius: var(--border-radius-s);
+  overflow: hidden;
+  text-wrap: nowrap;
+  
+  
+}
+.fields .last-row .delete-btn:hover::after {
+  width: 190px;
+  border: var(--border-s);
+  padding: 0 var(--separation-xs);
+  box-shadow: var(--box-shadow);
+  transition: width var(--transition-s);
 }
 
 dialog {

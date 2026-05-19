@@ -115,18 +115,27 @@ function displayBooks(bookArray, displayContainer){
         pages.classList.toggle("pages");
         pages.textContent = item.pages + ' pages';
 
+        let delBtnContainer = document.createElement("div");
+        delBtnContainer.classList.toggle("delete-btn-container");
         let delBtn = document.createElement('button');
         delBtn.classList.toggle("delete-btn");
         delBtn.textContent = "";
-        delBtn.addEventListener('click', (e) => {
-            bookCollection.splice(bookCollection.findIndex( (current) => {
-                let greatGrandparent = e.target.parentElement.parentElement.parentElement;
-                let bookID = greatGrandparent.getAttribute('data-book-id');
-                return current.id === bookID;
-            }), 1);
-            displayBooks(bookCollection, libraryContainer);
-        }, {once: true});
-        lastRow.append(pages, delBtn);
+        delBtn.addEventListener('mousedown', (e) => {
+            let timeoutID = setTimeout(() => {
+                bookCollection.splice(bookCollection.findIndex((current) => {
+                    let greatGrandparent = e.target.parentElement.parentElement.parentElement.parentElement;
+                    let bookID = greatGrandparent.getAttribute('data-book-id');
+                    return current.id === bookID;
+                }), 1);
+                displayBooks(bookCollection, libraryContainer);
+            }, 2500);
+
+            window.addEventListener('mouseup', () => {
+                clearTimeout(timeoutID);
+            }, {once: true});
+        });
+        delBtnContainer.append(delBtn);
+        lastRow.append(pages, delBtnContainer);
 
         fields.append(title, author, category, lastRow);
         bookCard.append(fields);
