@@ -115,15 +115,19 @@ function displayBooks(bookArray, displayContainer){
         pages.classList.toggle("pages");
         pages.textContent = item.pages + ' pages';
 
-        let delBtnContainer = document.createElement("div");
-        delBtnContainer.classList.toggle("delete-btn-container");
         let delBtn = document.createElement('button');
         delBtn.classList.toggle("delete-btn");
-        delBtn.textContent = "";
+        let binImg = document.createElement('img');
+        binImg.setAttribute('src', './img/bin.png');
+        binImg.setAttribute('alt', 'delete bin icon');
+        delBtn.append(binImg);
+
+        
         delBtn.addEventListener('mousedown', (e) => {
+            e.preventDefault();
             let timeoutID = setTimeout(() => {
                 bookCollection.splice(bookCollection.findIndex((current) => {
-                    let greatGrandparent = e.target.parentElement.parentElement.parentElement.parentElement;
+                    let greatGrandparent = e.target.parentElement.parentElement.parentElement;
                     let bookID = greatGrandparent.getAttribute('data-book-id');
                     return current.id === bookID;
                 }), 1);
@@ -134,9 +138,8 @@ function displayBooks(bookArray, displayContainer){
                 clearTimeout(timeoutID);
             }, {once: true});
         });
-        delBtnContainer.append(delBtn);
-        lastRow.append(pages, delBtnContainer);
-
+        
+        lastRow.append(pages, delBtn);
         fields.append(title, author, category, lastRow);
         bookCard.append(fields);
         displayContainer.append(bookCard);

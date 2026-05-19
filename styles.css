@@ -86,6 +86,7 @@ h1, h2, h3, h4, h5, h6 {
     --input-width: 12rem;
 
     --box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.13);
+    --box-shadow-none: 0 3px 5px 1px rgba(0, 0, 0, 0);
 }
 
 html{
@@ -403,69 +404,53 @@ button.add-book:active{
 .fields .last-row *{
   flex: 1;
 }
-.fields .last-row .delete-btn-container {
-  flex: none;
-  
-  
-  
-  position: relative;
-  z-index: 0;
-}
 .fields .last-row .delete-btn {
+  flex: none;
   border: none;
-  border: var(--border-s);
-  border-radius: var(--border-radius-s);
-  padding: var(--separation-xs);
-  height: var(--separation-xs);
-  width: var(--separation-xs);
+  /* border: var(--border-s);
+  border-radius: var(--border-radius-s); */
   background: none;
-  background-image: url("./img/bin.png");
-  background-position: center;
-  background-size: 75%;
-  background-repeat: no-repeat;
-}
-.fields .last-row .delete-btn::before {
-  content: "";
-  border-radius: var(--border-radius-s);
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: -2;
-  background-color: var(--color-orange);
-  transform: translateY(50%) scaleY(0%);
-  transition: transform var(--transition-s);
-}
-.fields .last-row .delete-btn:active::before {
-  transition: transform var(--transition-hold);
-  transform: translateY(0%) scaleY(100%);
-}
-.fields .last-row .delete-btn::after {
+  padding: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  content: "Hold to delete";
-  position: absolute;
-  height: 100%;
-  width: 0px;
-  top: 0px;
-  left: 0px;
-  z-index: -3;
-  background-color: white;
+  height: var(--separation-s);
   border-radius: var(--border-radius-s);
-  overflow: hidden;
-  text-wrap: nowrap;
-  
-  
+  transition: box-shadow var(--transition-s);
+  background-color: rgb(218, 218, 218);
+  justify-content: space-between;
 }
-.fields .last-row .delete-btn:hover::after {
-  width: 190px;
+.fields .last-row .delete-btn:hover{
+  padding: 0 0 0 10px;
+}
+.fields .last-row .delete-btn img {
   border: var(--border-s);
-  padding: 0 var(--separation-xs);
-  box-shadow: var(--box-shadow);
-  transition: width var(--transition-s);
+  border-radius: var(--border-radius-s);
+  
+  width: var(--separation-s);
+  background-image: linear-gradient(to top, var(--color-orange) 0% 50%, white 50% 100%);
+  background-size: 100% 200%;
+  background-position: top;
+  padding: calc(var(--separation-xs) / 2);
+  transition: background-position var(--transition-s);
 }
+.fields .last-row .delete-btn:active img {
+  transition: background-position var(--transition-hold);
+  background-position: bottom;
+}
+
+ .fields .last-row .delete-btn::before {
+  content: "Hold";
+  width: 0px;
+  
+  overflow: hidden;
+  transition: width var(--transition-s);
+  
+}
+
+.fields .last-row .delete-btn:hover::before {
+  width: 50px;
+}
+
 
 dialog {
   border-radius: var(--border-radius-m);
