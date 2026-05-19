@@ -17,6 +17,10 @@ function Book(title, author, category, pages, read){
         return `${this.title} by ${this.author}, Category: ${this.category}, ${this.pages} pages, ${this.read ? "read": "not read yet"}`;
     }
 }
+
+Book.prototype.toggleRead = function(){
+    this.read = !this.read;
+}
 // console.log(new Book("House of Leaves", "Mark Z. Danielewski", "Horror", 736, false).info());
 
 function addBookToCollection(form) {
@@ -68,7 +72,9 @@ function displayBooks(bookArray, displayContainer){
         //          <div class="category"></div>
         //          <div class="last-row">
         //              <div class="pages"></div>
-        //              <button class="delete-btn">Delete</button>
+        //              <button class="delete-btn">
+        //                  <img>
+        //              </button>
         //          </div>
         //     </div>
         // </div>
@@ -82,7 +88,7 @@ function displayBooks(bookArray, displayContainer){
         let bookmark = document.createElement("div");
         bookmark.classList.toggle("bookmark");
         bookmark.addEventListener("click", () => {
-            item.read = !item.read;
+            item.toggleRead();
             bookmark.classList.toggle("read");
             bookmark.textContent = item.read ? "Read" : "Not Read";
         });
